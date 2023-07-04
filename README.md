@@ -21,11 +21,11 @@ A imagem do php7 inclui:
 
 1. Clone o projeto
 ````sh
-git clone https://github.com/flexpeak/docker-flex.git
+git clone https://github.com/marcinhoferreira/docker-leal-softwares.git
 ````
 2. Entre na pasta do projeto
 ````sh
-cd docker-flex
+cd docker-leal-softwares
 ````
 3. Copie o arquivo ``.env-example`` para um novo arquivo chamado ``.env`` e, se necessário, edite de acordo com as suas preferências
 ````sh
