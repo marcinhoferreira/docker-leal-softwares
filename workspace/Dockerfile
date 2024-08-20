@@ -7,7 +7,7 @@ RUN groupadd -g ${USER_GID} lealdock && useradd -u ${USER_UID} -g lealdock -m le
 
 RUN dnf update -y && dnf install -y curl
 RUN curl -sL https://rpm.nodesource.com/setup_22.x | bash
-RUN sudo dnf update -y && sudo dnf install -y nodejs && sudo dnf install -y nano cron && sudo dnf clean
+RUN dnf update -y && dnf install -y nodejs && dnf install -y nano cron && sudo dnf clean
 
 RUN npm install -g sequelize-cli
 RUN dnf install -y git
