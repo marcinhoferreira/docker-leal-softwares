@@ -1,16 +1,16 @@
-FROM debian:stable-slim
+FROM rockylinux:9
 
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd -g ${USER_GID} flexdock && useradd -u ${USER_UID} -g flexdock -m flexdock && usermod -p "*" flexdock
+RUN groupadd -g ${USER_GID} lealdock && useradd -u ${USER_UID} -g lealdock -m lealdock && usermod -p "*" lealdock
 
-RUN apt update && apt install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
-RUN apt-get update && apt-get install -y nodejs && apt-get install -y nano cron && apt-get clean
+RUN dnf update && dnf install -y curl
+RUN curl -sL https://rpm.nodesource.com/setup_22.x | bash
+RUN dnf update && dnf install -y nodejs && dnf install -y nano cron && dnf clean
 
 RUN npm install -g sequelize-cli
-RUN apt install -y git
+RUN dnf install -y git
 
 RUN rm -rf /var/www/html
 
