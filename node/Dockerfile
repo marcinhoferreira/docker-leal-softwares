@@ -1,8 +1,8 @@
-FROM debian:stable-slim
+FROM rockylinux:9
 
-RUN apt update && apt install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
-RUN apt-get update && apt-get install -y nodejs && apt-get install -y nano cron && apt-get clean
+RUN dnf update -y && dnf install -y curl --skip-broken --nobest
+RUN curl -sL https://rpm.nodesource.com/setup_22.x | bash
+RUN dnf update -y && dnf install -y nodejs && dnf install -y nano cronie-noanacron && dnf clean all
 
 RUN rm -rf /var/www/html
 
