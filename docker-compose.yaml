@@ -18,6 +18,28 @@ services:
     depends_on:
       - php8
 
+  postgres:
+    build:
+      context: ./postgres
+      args:
+        - USER_UID=${USER_UID}
+        - USER_GID=${USER_GID}
+    container_name: leal-postgres
+    restart: always
+    tty: true
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ${DATA_LIB}/data/postgres:/var/lib/postgresql/data
+      - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    ports:
+      - 5432:5432
+    networks:
+      - leal-network
+
   mariadb:
     image: mariadb:latest
     command: mariadb --sql_mode=""
