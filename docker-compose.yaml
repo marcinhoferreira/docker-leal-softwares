@@ -1,5 +1,23 @@
 
 services:
+  php8:
+    build:
+      context: ./php8
+      args:
+        - USER_UID=${USER_UID}
+        - USER_GID=${USER_GID}
+    container_name: leal-php8
+    restart: always
+    volumes:
+      - ../:/var/www/
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - ./docker-php-memlimit.ini:/usr/local/etc/php/conf.d/docker-php-memlimit.ini
+      - ./openssl.cnf:/etc/ssl/openssl.cnf
+    networks:
+      - leal-network
+    tty: true
+
   nginx:
     build: ./nginx
     container_name: leal-nginx
@@ -59,24 +77,6 @@ services:
       - 3306:3306
     networks:
       - leal-network
-
-  php8:
-    build:
-      context: ./php8
-      args:
-        - USER_UID=${USER_UID}
-        - USER_GID=${USER_GID}
-    container_name: leal-php8
-    restart: always
-    volumes:
-      - ../:/var/www/
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
-      - ./docker-php-memlimit.ini:/usr/local/etc/php/conf.d/docker-php-memlimit.ini
-      - ./openssl.cnf:/etc/ssl/openssl.cnf
-    networks:
-      - leal-network
-    tty: true
       
   node:
     build:
