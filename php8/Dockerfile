@@ -3,9 +3,9 @@ FROM php:8.1-fpm
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd -g ${USER_GID} flexdock && \
-useradd -u ${USER_UID} -g flexdock -m flexdock && \
-usermod -p "*" flexdock
+RUN groupadd -g ${USER_GID} lealdock && \
+useradd -u ${USER_UID} -g lealdock -m lealdock && \
+usermod -p "*" lealdock
 
 RUN ldconfig
 
@@ -49,4 +49,4 @@ RUN docker-php-ext-install zip
 WORKDIR /var/www
 
 
-COPY ./.bash_aliases /home/flexdock
+COPY ./.bash_aliases /home/lealdock
