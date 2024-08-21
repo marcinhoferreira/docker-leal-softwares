@@ -18,7 +18,7 @@ RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql soap gd
 RUN docker-php-ext-install exif
 
 RUN docker-php-ext-install calendar && docker-php-ext-configure calendar
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
+RUN curl -sL https://rpm.nodesource.com/setup_22.x | bash
 RUN apt-get update && apt-get install -y nodejs && apt-get clean
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
