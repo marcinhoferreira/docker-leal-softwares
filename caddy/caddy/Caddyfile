@@ -28,3 +28,38 @@
 #    try_files {path} /index.html
 #    file_server
 #}
+https://api.raiozeus.com.br {
+    reverse_proxy node:8080
+}
+
+https://api-hml.raiozeus.com.br {
+    reverse_proxy node:8081
+}
+
+https://www.easyseller.com.br {
+    redir https://easyseller.com.br{uri}
+}
+
+https://adm.easyseller.com.br {
+    redir https://easyseller.com.br{uri}
+}
+
+https://app.easyseller.com.br {
+    redir https://easyseller.com.br{uri}
+}
+
+https://docs.easyseller.com.br {
+    redir https://easyseller.com.br{uri}
+}
+
+https://easyseller.com.br {
+    root * /var/www/app/easyseller/frontend/build
+    try_files {path} /index.html
+    file_server
+}
+
+https://app-hml.easyseller.com.br {
+    root * /var/www/app/easyseller-hml/frontend/build
+    try_files {path} /index.html
+    file_server
+}
