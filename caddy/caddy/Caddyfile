@@ -28,11 +28,11 @@
 #    try_files {path} /index.html
 #    file_server
 #}
-https://api.raiozeus.com.br {
+https://api.easyseller.com.br {
     reverse_proxy node:8080
 }
 
-https://api-hml.raiozeus.com.br {
+https://api-hml.easyseller.com.br {
     reverse_proxy node:8081
 }
 
@@ -53,13 +53,13 @@ https://docs.easyseller.com.br {
 }
 
 https://easyseller.com.br {
-    root * /var/www/app/easyseller/frontend/build
+    root * /var/www/leal-softwares/apps/easyseller/client/build
     try_files {path} /index.html
     file_server
 }
 
 https://app-hml.easyseller.com.br {
-    root * /var/www/app/easyseller-hml/frontend/build
+    root * /var/www/leal-softwares/apps/easyseller-hml/client/build
     try_files {path} /index.html
     file_server
 }
