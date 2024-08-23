@@ -5,7 +5,7 @@ module.exports = [{
 }, {
   script: 'Main.js',
   name: 'easyseller-api-hml',
-  cwd: '/var/www/leal-softwares/apps/easyseller-hml/server/src/'
+  cwd: '/var/www/leal-softwares/apps/easyseller/server/src/'
 }]
 /*
 EXEMPLO COM MULTIPLOS SERVIDORES
