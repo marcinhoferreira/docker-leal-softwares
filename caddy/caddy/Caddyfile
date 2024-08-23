@@ -58,8 +58,8 @@ https://easyseller.com.br {
     file_server
 }
 
-https://app-hml.easyseller.com.br {
-    root * /var/www/leal-softwares/apps/easyseller-hml/client/build
-    try_files {path} /index.html
-    file_server
-}
+# https://app-hml.easyseller.com.br {
+#     root * /var/www/leal-softwares/apps/easyseller-hml/client/build
+#     try_files {path} /index.html
+#     file_server
+# }
