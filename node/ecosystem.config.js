@@ -1,12 +1,10 @@
-module.exports = [{
-  script: 'Main.js',
-  name: 'easyseller-api',
-  cwd: '/var/www/leal-softwares/apps/easyseller/server/src/'
-}, {
-  script: 'Main.js',
-  name: 'easyseller-api-hml',
-  cwd: '/var/www/leal-softwares/apps/easyseller/server/src/'
-}]
+module.exports = [
+  {
+    script: 'Main.js',
+    name: 'easyseller-api',
+    cwd: '/var/www/leal-softwares/apps/easyseller/server/src/'
+  }
+]
 /*
 EXEMPLO COM MULTIPLOS SERVIDORES
 module.exports = [{
