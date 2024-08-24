@@ -23,6 +23,23 @@ services:
     # networks:
     #   - leal-network
 
+  workspace:
+    build:
+      context: ./workspace
+      args:
+        - USER_UID=${USER_UID}
+        - USER_GID=${USER_GID}
+    container_name: workspace
+    restart: always
+    volumes:
+      - ../:/var/www/
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - ./openssl.cnf:/etc/ssl/openssl.cnf
+    # networks:
+    #   - leal-network
+    tty: true
+
   # php8:
   #   build:
   #     context: ./php8
@@ -98,23 +115,6 @@ services:
   #   tty: true
   #   depends_on:
   #     - workspace
-
-  # workspace:
-  #   build:
-  #     context: ./workspace
-  #     args:
-  #       - USER_UID=${USER_UID}
-  #       - USER_GID=${USER_GID}
-  #   container_name: leal-workspace
-  #   restart: always
-  #   volumes:
-  #     - ../:/var/www/
-  #     - "/etc/timezone:/etc/timezone:ro"
-  #     - "/etc/localtime:/etc/localtime:ro"
-  #     - ./openssl.cnf:/etc/ssl/openssl.cnf
-  #   networks:
-  #     - leal-network
-  #   tty: true
 
   caddy:
     build: ./caddy
