@@ -1,7 +1,14 @@
 services:
   postgres:
     container_name: postgres-docker
-    image: postgres
+    # image: postgres
+    build:
+      context: ./postgres
+      args:
+        - USER_UID=${USER_UID}
+        - USER_GID=${USER_GID}
+    restart: always
+    tty: true
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -10,13 +17,6 @@ services:
       - ${DATA_LIB}/data/postgres:/var/lib/postgresql/data
     ports:
       - "5433:5432"
-    # build:
-    #   context: ./postgres
-    #   args:
-    #     - USER_UID=${USER_UID}
-    #     - USER_GID=${USER_GID}
-    # restart: always
-    # tty: true
     # volumes:
     #   - ${DATA_LIB}/data/postgres:/var/lib/postgresql/data
     #   - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
