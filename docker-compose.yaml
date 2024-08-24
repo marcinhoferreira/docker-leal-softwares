@@ -1,5 +1,30 @@
+version: '3.8'
 
 services:
+  postgres:
+    container_name: postgres-docker
+    image: postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=$(POSTGRES_DB)
+    volumes:
+      - ${DATA_LIB}/data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5433"
+    # build:
+    #   context: ./postgres
+    #   args:
+    #     - USER_UID=${USER_UID}
+    #     - USER_GID=${USER_GID}
+    # restart: always
+    # tty: true
+    # volumes:
+    #   - ${DATA_LIB}/data/postgres:/var/lib/postgresql/data
+    #   - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    # networks:
+    #   - leal-network
+
   php8:
     build:
       context: ./php8
@@ -35,26 +60,6 @@ services:
       - leal-network
     depends_on:
       - php8
-
-  postgres:
-    build:
-      context: ./postgres
-      args:
-        - USER_UID=${USER_UID}
-        - USER_GID=${USER_GID}
-    container_name: leal-postgres
-    restart: always
-    tty: true
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    volumes:
-      - ${DATA_LIB}/data/postgres:/var/lib/postgresql/data
-      - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-    ports:
-      - 5433:5433
-    networks:
-      - leal-network
 
   mariadb:
     image: mariadb:latest
@@ -128,5 +133,5 @@ services:
     tty: true  
 
 networks: 
-  leal-network:
+  docker-network:
     driver: bridge
