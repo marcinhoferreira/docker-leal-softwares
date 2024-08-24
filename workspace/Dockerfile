@@ -3,7 +3,7 @@ FROM rockylinux:9
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd -g ${USER_GID} leal && useradd -u ${USER_UID} -g leal -m lealdock && usermod -p "*" leal
+RUN groupadd -g ${USER_GID} leal && useradd -u ${USER_UID} -g leal -m leal && usermod -p "*" leal
 
 RUN dnf update -y && dnf install -y curl --skip-broken --nobest
 RUN curl -sL https://rpm.nodesource.com/setup_22.x | bash
