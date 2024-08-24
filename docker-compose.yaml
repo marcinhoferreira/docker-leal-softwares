@@ -1,6 +1,6 @@
 services:
   postgres:
-    container_name: postgres-docker
+    container_name: postgresql
     # image: postgres
     build:
       context: ./postgres
@@ -24,12 +24,12 @@ services:
     #   - leal-network
 
   workspace:
+    container_name: workspace
     build:
       context: ./workspace
       args:
         - USER_UID=${USER_UID}
         - USER_GID=${USER_GID}
-    container_name: workspace
     restart: always
     volumes:
       - ../:/var/www/
@@ -40,41 +40,77 @@ services:
     #   - leal-network
     tty: true
 
-  # php8:
-  #   build:
-  #     context: ./php8
-  #     args:
-  #       - USER_UID=${USER_UID}
-  #       - USER_GID=${USER_GID}
-  #   container_name: leal-php8
-  #   restart: always
-  #   volumes:
-  #     - ../:/var/www/
-  #     - "/etc/timezone:/etc/timezone:ro"
-  #     - "/etc/localtime:/etc/localtime:ro"
-  #     - ./docker-php-memlimit.ini:/usr/local/etc/php/conf.d/docker-php-memlimit.ini
-  #     - ./openssl.cnf:/etc/ssl/openssl.cnf
-  #   networks:
-  #     - leal-network
-  #   tty: true
+  node:
+    container_name: node
+    build:
+      context: ./node
+      args:
+        - USER_UID=${USER_UID}
+        - USER_GID=${USER_GID}
+    restart: always
+    volumes:
+      - ../:/var/www/
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - ./openssl.cnf:/etc/ssl/openssl.cnf
+      - "./node/ecosystem.config.js:/tmp/ecosystem.config.js"
+    # networks:
+    #   - leal-network
+    tty: true
+    depends_on:
+      - workspace
 
-  # nginx:
-  #   build: ./nginx
-  #   container_name: leal-nginx
-  #   restart: always
-  #   tty: true
-  #   ports:
-  #     - "80:80"
-  #     - "6001:6001"
-  #   volumes:
-  #     - ../:/var/www/
-  #     - ./nginx/sites/:/etc/nginx/conf.d/
-  #     - "/etc/timezone:/etc/timezone:ro"
-  #     - "/etc/localtime:/etc/localtime:ro"
-  #   networks:
-  #     - leal-network
-  #   depends_on:
-  #     - php8
+  php8:
+    container_name: php8
+    build:
+      context: ./php8
+      args:
+        - USER_UID=${USER_UID}
+        - USER_GID=${USER_GID}
+    restart: always
+    volumes:
+      - ../:/var/www/
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - ./docker-php-memlimit.ini:/usr/local/etc/php/conf.d/docker-php-memlimit.ini
+      - ./openssl.cnf:/etc/ssl/openssl.cnf
+    # networks:
+    #   - leal-network
+    tty: true
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    restart: always
+    tty: true
+    ports:
+      - "80:80"
+      - "6001:6001"
+    volumes:
+      - ../:/var/www/
+      - ./nginx/sites/:/etc/nginx/conf.d/
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    # networks:
+    #   - leal-network
+    depends_on:
+      - php8
+
+
+  caddy:
+    container_name: caddy
+    build: ./caddy
+    volumes:
+      - ../:/var/www
+      - ./caddy/caddy:/etc/caddy
+      - .logs/caddy:/var/log/caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    # networks:
+    #   - docker-network
+    restart: always
+    tty: true
 
   # mariadb:
   #   image: mariadb:latest
@@ -95,41 +131,7 @@ services:
   #     - 3306:3306
   #   networks:
   #     - leal-network
-      
-  # node:
-  #   build:
-  #     context: ./node
-  #     args:
-  #       - USER_UID=${USER_UID}
-  #       - USER_GID=${USER_GID}
-  #   container_name: leal-node
-  #   restart: always
-  #   volumes:
-  #     - ../:/var/www/
-  #     - "/etc/timezone:/etc/timezone:ro"
-  #     - "/etc/localtime:/etc/localtime:ro"
-  #     - ./openssl.cnf:/etc/ssl/openssl.cnf
-  #     - "./node/ecosystem.config.js:/tmp/ecosystem.config.js"
-  #   networks:
-  #     - leal-network
-  #   tty: true
-  #   depends_on:
-  #     - workspace
 
-  caddy:
-    build: ./caddy
-    volumes:
-      - ../:/var/www
-      - ./caddy/caddy:/etc/caddy
-      - .logs/caddy:/var/log/caddy
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - docker-network
-    restart: always
-    tty: true  
-
-networks: 
-  docker-network:
-    driver: bridge
+# networks: 
+#   docker-network:
+#     driver: bridge

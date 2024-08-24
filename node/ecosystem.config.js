@@ -1,7 +1,7 @@
 module.exports = [
   {
     script: 'Main.js',
-    name: 'easyseller-api',
+    name: 'easy-seller-api',
     cwd: '/var/www/leal-softwares/apps/easyseller/server/src/'
   }
 ]

@@ -28,35 +28,36 @@
 #    try_files {path} /index.html
 #    file_server
 #}
+
 https://api.easyseller.com.br {
     reverse_proxy node:8080
 }
 
-https://api-hml.easyseller.com.br {
-    reverse_proxy node:8081
-}
+# https://api-hml.easyseller.com.br {
+#     reverse_proxy node:8081
+# }
 
-https://www.easyseller.com.br {
-    redir https://easyseller.com.br{uri}
-}
+# https://www.easyseller.com.br {
+#     redir https://easyseller.com.br{uri}
+# }
 
-https://adm.easyseller.com.br {
-    redir https://easyseller.com.br{uri}
-}
+# https://adm.easyseller.com.br {
+#     redir https://easyseller.com.br{uri}
+# }
 
-https://app.easyseller.com.br {
-    redir https://easyseller.com.br{uri}
-}
+# https://app.easyseller.com.br {
+#     redir https://easyseller.com.br{uri}
+# }
 
-https://docs.easyseller.com.br {
-    redir https://easyseller.com.br{uri}
-}
+# https://docs.easyseller.com.br {
+#     redir https://easyseller.com.br{uri}
+# }
 
-https://easyseller.com.br {
-    root * /var/www/leal-softwares/apps/easyseller/client/build
-    try_files {path} /index.html
-    file_server
-}
+# https://easyseller.com.br {
+#     root * /var/www/leal-softwares/apps/easyseller/client/build
+#     try_files {path} /index.html
+#     file_server
+# }
 
 # https://app-hml.easyseller.com.br {
 #     root * /var/www/leal-softwares/apps/easyseller-hml/client/build
