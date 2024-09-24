@@ -1,8 +1,11 @@
 module.exports = [
   {
+    name: 'api-meu-fiscal',
     script: 'Main.js',
-    name: 'easy-seller-api',
-    cwd: '/var/www/leal-softwares/apps/easyseller/server/src/'
+    cwd: '/var/www/leal-softwares/apps/meu-fiscal/server',
+    env: {
+      'NODE_ENV': 'test'
+    }
   }
 ]
 /*
