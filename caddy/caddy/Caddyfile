@@ -33,15 +33,15 @@ https://api.meufiscal.com.br {
     reverse_proxy node:8081
 }
 
-#https://www.meufiscal.com.br {
-#    redir https://meufiscal.com.br{uri}
-#}
+https://www.meufiscal.com.br {
+    redir https://meufiscal.com.br{uri}
+}
 
-#https://meufiscal.com.br {
-#    root * /var/www/leal-softwares/apps/meufiscal/client/build
-#    try_files {path} /index.html
-#    file_server
-#}
+https://meufiscal.com.br {
+    root * /var/www/leal-softwares/apps/meufiscal/client/build
+    try_files {path} /index.html
+    file_server
+}
 
 # https://api.easyseller.com.br {
 #     reverse_proxy node:8081
