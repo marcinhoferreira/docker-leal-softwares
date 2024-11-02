@@ -1,10 +1,20 @@
 module.exports = [
   {
-    name: 'api-meu-fiscal',
+    name: 'meu-fiscal-api',
     script: 'Main.js',
     cwd: '/var/www/leal-softwares/apps/meu-fiscal/server',
     env: {
-      'NODE_ENV': 'test'
+      'PORT': 8081,
+      'NODE_ENV': 'production'
+    }
+  },
+  {
+    name: 'easy-shop-control-api',
+    script: 'Main.js',
+    cwd: '/var/www/leal-softwares/apps/easy-shop-control/server',
+    env: {
+      'PORT': 8082,
+      'NODE_ENV': 'production'
     }
   }
 ]

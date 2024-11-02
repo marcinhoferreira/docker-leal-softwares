@@ -3,9 +3,9 @@ FROM php:8.1-fpm
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd -g ${USER_GID} leal && \
-useradd -u ${USER_UID} -g leal -m leal && \
-usermod -p "*" leal
+RUN groupadd -g ${USER_GID} lealsoftwares && \
+useradd -u ${USER_UID} -g lealsoftwares -m lealsoftwares && \
+usermod -p "*" lealsoftwares
 
 RUN ldconfig
 
@@ -49,4 +49,4 @@ RUN docker-php-ext-install zip
 WORKDIR /var/www
 
 
-COPY ./.bash_aliases /home/lealdock
+COPY ./.bash_aliases /home/lealsoftwaresdock
