@@ -7,4 +7,4 @@ RUN groupadd -g ${USER_GID} leal && useradd -u ${USER_UID} -g leal -m leal && us
 
 CMD ["postgres"]
 
-EXPOSE 5433
+EXPOSE 5432

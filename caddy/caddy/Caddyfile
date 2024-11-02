@@ -30,7 +30,7 @@
 #}
 
 https://api.meufiscal.com.br {
-    reverse_proxy node:8081
+    reverse_proxy node:15000
 }
 
 https://www.meufiscal.com.br {
@@ -38,39 +38,40 @@ https://www.meufiscal.com.br {
 }
 
 https://meufiscal.com.br {
-    root * /var/www/leal-softwares/apps/meufiscal/client/build
+    root * /var/www/leal-softwares/apps/meu-fiscal/client/dist
     try_files {path} /index.html
     file_server
 }
 
-# https://api.easyseller.com.br {
-#     reverse_proxy node:8081
-# }
+https://api.easyseller.com.br {
+    reverse_proxy node:16000
+}
 
-# https://www.easyseller.com.br {
-#     redir https://easyseller.com.br{uri}
-# }
+https://www.easyseller.com.br {
+    redir https://easyseller.com.br{uri}
+}
 
-# https://adm.easyseller.com.br {
-#     redir https://easyseller.com.br{uri}
-# }
+https://easyseller.com.br {
+    root * /var/www/leal-softwares/apps/easyseller/client/dist
+    try_files {path} /index.html
+    file_server
+}
 
-# https://app.easyseller.com.br {
-#     redir https://easyseller.com.br{uri}
-# }
+https://adm.easyseller.com.br {
+    redir https://easyseller.com.br{uri}
+}
+
+https://app.easyseller.com.br {
+    redir https://easyseller.com.br{uri}
+}
 
 # https://docs.easyseller.com.br {
 #     redir https://easyseller.com.br{uri}
 # }
 
-# https://easyseller.com.br {
-#     root * /var/www/leal-softwares/apps/easyseller/client/build
-#     try_files {path} /index.html
-#     file_server
-# }
 
 # https://app-hml.easyseller.com.br {
-#     root * /var/www/leal-softwares/apps/easyseller-hml/client/build
+#     root * /var/www/leal-softwares/apps/easyseller-hml/client/dist
 #     try_files {path} /index.html
 #     file_server
 # }
