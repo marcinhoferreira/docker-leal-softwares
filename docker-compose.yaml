@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: postgresql
-    # image: postgres
+    image: postgres
     build:
       context: ./postgres
       args:
@@ -15,13 +15,11 @@ services:
       - POSTGRES_DB=$(POSTGRES_DB)
     volumes:
       - ${DATA_LIB}/data/postgres:/var/lib/postgresql/data
+      - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     ports:
-      - "5433:5432"
-    # volumes:
-    #   - ${DATA_LIB}/data/postgres:/var/lib/postgresql/data
-    #   - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-    # networks:
-    #   - leal-network
+      - "5432:5432"
+    networks:
+      - docker-network
 
   workspace:
     container_name: workspace
@@ -36,8 +34,8 @@ services:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
       - ./openssl.cnf:/etc/ssl/openssl.cnf
-    # networks:
-    #   - leal-network
+    networks:
+      - docker-network
     tty: true
 
   node:
@@ -54,8 +52,8 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - ./openssl.cnf:/etc/ssl/openssl.cnf
       - "./node/ecosystem.config.js:/tmp/ecosystem.config.js"
-    # networks:
-    #   - leal-network
+    networks:
+      - docker-network
     tty: true
     depends_on:
       - workspace
@@ -74,8 +72,8 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - ./docker-php-memlimit.ini:/usr/local/etc/php/conf.d/docker-php-memlimit.ini
       - ./openssl.cnf:/etc/ssl/openssl.cnf
-    # networks:
-    #   - leal-network
+    networks:
+      - docker-network
     tty: true
 
   nginx:
@@ -91,11 +89,10 @@ services:
       - ./nginx/sites/:/etc/nginx/conf.d/
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-    # networks:
-    #   - leal-network
+    networks:
+      - docker-network
     depends_on:
       - php8
-
 
   caddy:
     container_name: caddy
@@ -107,31 +104,31 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    # networks:
-    #   - docker-network
+    networks:
+      - docker-network
     restart: always
     tty: true
 
-  # mariadb:
-  #   image: mariadb:latest
-  #   command: mariadb --sql_mode=""
-  #   container_name: leal-mariadb
-  #   restart: always
-  #   tty: true
-  #   environment:
-  #     - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
-  #     - MARIADB_USER=${MARIADB_USER}
-  #     - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-  #   volumes:
-  #     - ${DATA_LIB}/data/mysql:/var/lib/mysql
-  #     - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-  #     - "/etc/timezone:/etc/timezone:ro"
-  #     - "/etc/localtime:/etc/localtime:ro"
-  #   ports:
-  #     - 3306:3306
-  #   networks:
-  #     - leal-network
+  mariadb:
+    image: mariadb:latest
+    command: mariadb --sql_mode=""
+    container_name: leal-mariadb
+    restart: always
+    tty: true
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+    volumes:
+      - ${DATA_LIB}/data/mysql:/var/lib/mysql
+      - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    ports:
+      - 3306:3306
+    networks:
+      - docker-network
 
-# networks: 
-#   docker-network:
-#     driver: bridge
+networks: 
+  docker-network:
+    driver: bridge
