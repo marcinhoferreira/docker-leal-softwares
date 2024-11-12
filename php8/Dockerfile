@@ -49,4 +49,4 @@ RUN docker-php-ext-install zip
 WORKDIR /var/www
 
 
-COPY ./.bash_aliases /home/lealsoftwaresdock
+COPY ./.bash_aliases /home/lealsoftwares
