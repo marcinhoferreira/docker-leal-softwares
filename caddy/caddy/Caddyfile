@@ -30,11 +30,7 @@
 #}
 
 https://api.meufiscal.com.br {
-    reverse_proxy node:15000
-}
-
-https://www.meufiscal.com.br {
-    redir https://meufiscal.com.br{uri}
+    reverse_proxy node:8081
 }
 
 https://meufiscal.com.br {
@@ -43,35 +39,53 @@ https://meufiscal.com.br {
     file_server
 }
 
-https://api.easyseller.com.br {
-    reverse_proxy node:16000
+https://www.meufiscal.com.br {
+    redir https://meufiscal.com.br{uri}
 }
 
-https://www.easyseller.com.br {
-    redir https://easyseller.com.br{uri}
+https://api.easyshopcontrol.com.br {
+    reverse_proxy node:8082
 }
 
-https://easyseller.com.br {
-    root * /var/www/leal-softwares/apps/easyseller/client/dist
+https://www.easyshopcontrol.com.br {
+    redir https://easyshopcontrol.com.br{uri}
+}
+
+https://easyshopcontrol.com.br {
+    root * /var/www/leal-softwares/apps/easy-shop-control/client/dist
     try_files {path} /index.html
     file_server
 }
 
-https://adm.easyseller.com.br {
-    redir https://easyseller.com.br{uri}
+https://api.easyvirtualstore.com.br {
+    reverse_proxy node:8083
 }
 
-https://app.easyseller.com.br {
-    redir https://easyseller.com.br{uri}
+https://easyvirtualstore.com.br {
+    root * /var/www/leal-softwares/apps/easy-virtual-store/client/dist
+    try_files {path} /index.html
+    file_server
 }
 
-# https://docs.easyseller.com.br {
-#     redir https://easyseller.com.br{uri}
+https://www.easyvirvirtual-storeore.com.br {
+    redir https://easyvirtualstore.com.br{uri}
+}
+
+https://adm.easyvirvirtual-storeore.com.br {
+    redir https://easyvirtualstore.com.br{uri}
+}
+
+https://app.easyvirvirtual-storeore.com.br {
+    redir https://easyvirtualstore.com.br{uri}
+}
+
+# https://docs.easyvirvirtual-storeore.com.br {
+#     redir https://easyvirtualstore.com.br{uri}
 # }
 
 
-# https://app-hml.easyseller.com.br {
-#     root * /var/www/leal-softwares/apps/easyseller-hml/client/dist
-#     try_files {path} /index.html
+# https://app-hml.easyvirvirtual-storeore.com.br {
+#     root * /var/www/leal-softwares/apps/easyvirtualstovirtual-store/client/dist
+#     try_files virtual-store /index.html
 #     file_server
 # }
