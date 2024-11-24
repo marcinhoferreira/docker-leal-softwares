@@ -47,14 +47,14 @@ https://api.easyshopcontrol.com.br {
     reverse_proxy node:8082
 }
 
-https://www.easyshopcontrol.com.br {
-    redir https://easyshopcontrol.com.br{uri}
-}
-
 https://easyshopcontrol.com.br {
     root * /var/www/leal-softwares/apps/easy-shop-control/client/dist
     try_files {path} /index.html
     file_server
+}
+
+https://www.easyshopcontrol.com.br {
+    redir https://easyshopcontrol.com.br{uri}
 }
 
 https://api.easyvirtualstore.com.br {
