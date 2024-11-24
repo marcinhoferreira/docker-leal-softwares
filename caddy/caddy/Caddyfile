@@ -67,15 +67,15 @@ https://easyvirtualstore.com.br {
     file_server
 }
 
-https://www.easyvirvirtual-storeore.com.br {
+https://www.easyvirvirtualstore.com.br {
     redir https://easyvirtualstore.com.br{uri}
 }
 
-https://adm.easyvirvirtual-storeore.com.br {
+https://adm.easyvirvirtualstore.com.br {
     redir https://easyvirtualstore.com.br{uri}
 }
 
-https://app.easyvirvirtual-storeore.com.br {
+https://app.easyvirvirtualstore.com.br {
     redir https://easyvirtualstore.com.br{uri}
 }
 
