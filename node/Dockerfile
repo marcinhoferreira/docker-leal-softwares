@@ -10,4 +10,4 @@ WORKDIR /var/www
 
 RUN npm install pm2 -g
 
-CMD ["pm2-runtime", "/tmp/ecosystem.config.js", "--env production"]
+CMD ["pm2-runtime", "/tmp/ecosystem.config.js"]
