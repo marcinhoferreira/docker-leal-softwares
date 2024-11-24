@@ -1,32 +1,47 @@
-module.exports = [
-  {
-    name: 'meu-fiscal-api',
-    script: './src/Main.js',
-    cwd: '/var/www/leal-softwares/apps/meu-fiscal/server',
-    env: {
-      'PORT': 8081,
-      'NODE_ENV': 'production'
-    }
-  },
+const { watch } = require("fs");
+
+module.exports = {
+  apps: [
+  // {
+  //   name: 'meu-fiscal-api',
+  //   script: './src/Main.js',
+  //   cwd: '/var/www/leal-softwares/apps/meu-fiscal/server',
+  //   env: {
+  //     'PORT': 8081,
+  //     'NODE_ENV': 'production'
+  //   }
+  // },
   {
     name: 'easy-shop-control-api',
     script: './src/Main.js',
+    watch: true,
+    exec_mode: 'cluster',
     cwd: '/var/www/leal-softwares/apps/easy-shop-control/server',
-    env: {
+    env_production: {
       'PORT': 8082,
-      'NODE_ENV': 'production'
+      NODE_ENV: 'production'
+    },
+    env_development: {
+      'PORT': 9082,
+      NODE_ENV: 'development'
     }
   },
   {
     name: 'easy-virtual-store-api',
     script: './src/Main.js',
+    watch: true,
+    exec_mode: 'cluster',
     cwd: '/var/www/leal-softwares/apps/easy-virtual-store/server',
-    env: {
+    env_production: {
       'PORT': 8083,
-      'NODE_ENV': 'production'
+      NODE_ENV: 'production'
+    },
+    env_development: {
+      'PORT': 9083,
+      NODE_ENV: 'development'
     }
   }
-]
+]}
 /*
 EXEMPLO COM MULTIPLOS SERVIDORES
 module.exports = [{
