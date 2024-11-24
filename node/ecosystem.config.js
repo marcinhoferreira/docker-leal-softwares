@@ -17,14 +17,18 @@ module.exports = {
     watch: true,
     exec_mode: 'cluster',
     cwd: '/var/www/leal-softwares/apps/easy-shop-control/server',
-    env_production: {
+    env: {
       'PORT': 8082,
       NODE_ENV: 'production'
     },
-    env_development: {
-      'PORT': 9082,
-      NODE_ENV: 'development'
-    }
+    // env_production: {
+    //   'PORT': 8082,
+    //   NODE_ENV: 'production'
+    // },
+    // env_development: {
+    //   'PORT': 9082,
+    //   NODE_ENV: 'development'
+    // }
   },
   {
     name: 'easy-virtual-store-api',
@@ -32,14 +36,18 @@ module.exports = {
     watch: true,
     exec_mode: 'cluster',
     cwd: '/var/www/leal-softwares/apps/easy-virtual-store/server',
-    env_production: {
+    env: {
       'PORT': 8083,
       NODE_ENV: 'production'
     },
-    env_development: {
-      'PORT': 9083,
-      NODE_ENV: 'development'
-    }
+    // env_production: {
+    //   'PORT': 8083,
+    //   NODE_ENV: 'production'
+    // },
+    // env_development: {
+    //   'PORT': 9083,
+    //   NODE_ENV: 'development'
+    // }
   }
 ]}
 /*
