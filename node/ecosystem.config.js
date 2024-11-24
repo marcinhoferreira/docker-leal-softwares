@@ -30,25 +30,25 @@ module.exports = {
     //   NODE_ENV: 'development'
     // }
   },
-  {
-    name: 'easy-virtual-store-api',
-    script: './src/Main.js',
-    watch: true,
-    exec_mode: 'cluster',
-    cwd: '/var/www/leal-softwares/apps/easy-virtual-store/server',
-    env: {
-      'PORT': 8083,
-      NODE_ENV: 'production'
-    },
-    // env_production: {
-    //   'PORT': 8083,
-    //   NODE_ENV: 'production'
-    // },
-    // env_development: {
-    //   'PORT': 9083,
-    //   NODE_ENV: 'development'
-    // }
-  }
+  // {
+  //   name: 'easy-virtual-store-api',
+  //   script: './src/Main.js',
+  //   watch: true,
+  //   exec_mode: 'cluster',
+  //   cwd: '/var/www/leal-softwares/apps/easy-virtual-store/server',
+  //   env: {
+  //     'PORT': 8083,
+  //     NODE_ENV: 'production'
+  //   },
+  //   // env_production: {
+  //   //   'PORT': 8083,
+  //   //   NODE_ENV: 'production'
+  //   // },
+  //   // env_development: {
+  //   //   'PORT': 9083,
+  //   //   NODE_ENV: 'development'
+  //   // }
+  // }
 ]}
 /*
 EXEMPLO COM MULTIPLOS SERVIDORES
