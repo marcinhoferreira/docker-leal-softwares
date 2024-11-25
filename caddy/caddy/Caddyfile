@@ -57,19 +57,19 @@ https://www.easyshopcontrol.com.br {
     redir https://easyshopcontrol.com.br{uri}
 }
 
-# https://api.easyvirtualstore.com.br {
-#     reverse_proxy node:8083
-# }
+https://api.easyvirtualstore.com.br {
+    reverse_proxy node:8083
+}
 
-# https://easyvirtualstore.com.br {
-#     root * /var/www/leal-softwares/apps/easy-virtual-store/client/dist
-#     try_files {path} /index.html
-#     file_server
-# }
+https://easyvirtualstore.com.br {
+    root * /var/www/leal-softwares/apps/easy-virtual-store/client/dist
+    try_files {path} /index.html
+    file_server
+}
 
-# https://www.easyvirvirtualstore.com.br {
-#     redir https://easyvirtualstore.com.br{uri}
-# }
+https://www.easyvirvirtualstore.com.br {
+    redir https://easyvirtualstore.com.br{uri}
+}
 
 # https://adm.easyvirvirtualstore.com.br {
 #     redir https://easyvirtualstore.com.br{uri}
