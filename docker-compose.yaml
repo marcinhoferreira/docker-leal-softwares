@@ -112,7 +112,7 @@ services:
   mariadb:
     image: mariadb:latest
     command: mariadb --sql_mode=""
-    container_name: leal-mariadb
+    container_name: mariadb
     restart: always
     tty: true
     environment:
@@ -120,8 +120,8 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
     volumes:
-      - ${DATA_LIB}/data/mysql:/var/lib/mysql
-      - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ${DATA_LIB}/data/mariadb:/var/lib/mariadb
+      - ./mariadb/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
     ports:
