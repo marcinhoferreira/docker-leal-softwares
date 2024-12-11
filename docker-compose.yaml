@@ -120,10 +120,13 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
     volumes:
-      - ${DATA_LIB}/data/mariadb:/var/lib/mariadb
-      - ./mariadb/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
+    # - "./mariadb-data/data:/var/lib/mysql/data/"
+    # - "./mariadb-data/logs:/var/lib/mysql/logs/"
+      - ${DATA_LIB}/data/mariadb:/var/lib/mysql/data/
+      - ${DATA_LIB}/data/mariadb:/var/lib/mysql/logs/
+      # - ./mariadb/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      # - "/etc/timezone:/etc/timezone:ro"
+      # - "/etc/localtime:/etc/localtime:ro"
     ports:
       - 3306:3306
     networks:
