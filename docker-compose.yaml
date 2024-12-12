@@ -110,27 +110,48 @@ services:
     tty: true
 
   mariadb:
-    image: mariadb:latest
-    command: mariadb --sql_mode=""
     container_name: mariadb
+    image: mariadb:latest
     restart: always
-    tty: true
     environment:
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
     volumes:
-    # - "./mariadb-data/data:/var/lib/mysql/data/"
-    # - "./mariadb-data/logs:/var/lib/mysql/logs/"
-      - ${DATA_LIB}/data/mariadb:/var/lib/mysql/data/
-      - ${DATA_LIB}/data/mariadb:/var/lib/mysql/logs/
-      # - ./mariadb/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      # - "/etc/timezone:/etc/timezone:ro"
-      # - "/etc/localtime:/etc/localtime:ro"
+      - ${DATA_LIB}/data/mariadb/data:/var/lib/mysql/data/
+      - ${DATA_LIB}/data/mariadb/logs:/var/lib/mysql/logs/
     ports:
       - 3306:3306
     networks:
       - docker-network
+
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    command: mysqld --sql_mode=""
+    restart: always
+    tty: true
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ${DATA_LIB}/data/mysql:/var/lib/mysql
+      - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    ports:
+      - 3306:3306
+    networks:
+      - docker-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
 
 networks: 
   docker-network:
